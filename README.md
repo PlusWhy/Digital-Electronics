@@ -1,8 +1,8 @@
 # Digital-Electronics
 CCADigitalElectronics_Spring2018
 
-Find (online) an project of any sort using Arduino that you find interesting. Write a brief description and put a link in the README.md file in your Github repository. - remember I've posted gitHub resources at the bottom/end of class resources.
-Read about 3 of the sensors on the Adafruit Sensors guide listed in resources. Describe (briefly) what you've learned in your Github READ.md file.
-
-# Synthetic Pollenizer – Robotic interventions in the real-world ecological systems
+## Synthetic Pollenizer – Robotic interventions in the real-world ecological systems
 http://www.creativeapplications.net/environment/synthetic-pollenizer-robotic-interventions-in-the-real-world-ecological-systems/
+
+The project is is a conceptual intervention in real-world ecological systems using artificial flowers. It is made by different materials and auduino. Using 3D printer to create some complex structures.  Inspired by natural pollenizers, it imitates the process of bees gathering honey in nature, these robotic replicas artificially pollinate bees, integrating into the reproductive cycle of local flora; an initiative into a cybernetic ecology. 
+
