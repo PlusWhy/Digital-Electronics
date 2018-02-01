@@ -3,6 +3,8 @@ CCADigitalElectronics_Spring2018
 
 ## Synthetic Pollenizer – Robotic interventions in the real-world ecological systems
 http://www.creativeapplications.net/environment/synthetic-pollenizer-robotic-interventions-in-the-real-world-ecological-systems/
-http://www.creativeapplications.net/wp-content/uploads/2018/01/Synthetic-Pollenizer_02.jpg
 The project is is a conceptual intervention in real-world ecological systems using artificial flowers. It is made by different materials and auduino. Using 3D printer to create some complex structures.  Inspired by natural pollenizers, it imitates the process of bees gathering honey in nature, these robotic replicas artificially pollinate bees, integrating into the reproductive cycle of local flora; an initiative into a cybernetic ecology. 
 
+## 3 of the sensors on the Adafruit Sensors guide
+https://learn.adafruit.com/pir-passive-infrared-proximity-motion-sensor/
+PIR motion sensors is for sense motion, almost always used to detect whether a human has moved in or out of the sensors range. PIRs are basically made of a pyroelectric sensor, which can detect levels of infrared radiation. So it only can be used to detect the human or other lifes. 
