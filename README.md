@@ -23,7 +23,7 @@ FSRs can be used to detect physical pressure. The principle of this device is a 
 ## Idea: 
 I want to create a daft funk's helmet.(only the part of displaying/from Thomas)
 
-who are they?: https://www.youtube.com/user/daftpunkalive
+who are they?: https://en.wikipedia.org/wiki/Daft_Punk https://www.youtube.com/user/daftpunkalive
 
 Helmet?: https://www.thedaftclub.com/features/a-visual-history-of-daft-punks-helmets/
 
