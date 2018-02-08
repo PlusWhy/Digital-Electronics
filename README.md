@@ -1,3 +1,4 @@
+# week 2
 # Digital-Electronics
 CCADigitalElectronics_Spring2018
 
@@ -17,3 +18,18 @@ Photocells are sensors that allow you to detect light. It can be used to create 
 ### (FSRs) Force sensitive resister
 https://learn.adafruit.com/force-sensitive-resistor-fsr
 FSRs can be used to detect physical pressure. The principle of this device is a pressure-controlled resistor.
+
+# week 3
+## Idea: I want to create a daft funk's helmet.(only the part of displaying)
+## Why I wanna make it?
+I'm a fan of daft punk. I dream to create it a long time. And in this class, I have an opportunity to do it. 
+## what is the function of it?
+It can show some motion graphic which is record in its memory.
+Also it can 
+## Reference1: The MAX7219 and MAX7221 Led drivers
+http://playground.arduino.cc/Main/MAX72XXHardware
+## Reference2:  LED Matrix red 8x8 64 Led driven by MAX7219 (or MAX7221) and Arduino Uno
+https://www.youtube.com/watch?v=TOuKnOG8atk
+## Here is an example: HUGE LED matrix with Arduino
+https://www.youtube.com/watch?v=v1vRjOU_pGA
+
