@@ -42,7 +42,7 @@ Plus: Connect to the bluetooth board, and Be controled by smart phone.
 ## Reference1: The MAX7219 and MAX7221 Led drivers
 http://playground.arduino.cc/Main/MAX72XXHardware
 ## Reference2:  LED Matrix red 8x8 64 Led driven by MAX7219 (or MAX7221) and Arduino Uno
-https://www.youtube.com/watch?v=TOuKnOG8atk
+https://www.youtube.com/watch?v=WYaa8wE5oFQ
 ## Here is an example: HUGE LED matrix with Arduino/And successful example
 https://www.youtube.com/watch?v=v1vRjOU_pGA
 https://www.youtube.com/watch?v=DxjmQfeYztA
