@@ -22,14 +22,23 @@ FSRs can be used to detect physical pressure. The principle of this device is a 
 # week 3
 ## Idea: 
 I want to create a daft funk's helmet.(only the part of displaying/from Thomas)
+
 who are they?: https://www.youtube.com/user/daftpunkalive
+
 Helmet?: https://www.thedaftclub.com/features/a-visual-history-of-daft-punks-helmets/
+
 ## Why I wanna make it?
+
 I'm a fan of daft punk. I dream to create it a long time. And in this class, I have an opportunity to do it. 
+
 ## what is the function of it?
+
 It can show some motion graphic which is record in its memory.
-Also it can receipt music signal in the environment, and show different image pair to the beat of music. 
+
+Also it can receipt music signal in the environment, and show different image pair to the beat of music.
+
 Plus: Connect to the bluetooth board, and Be controled by smart phone.
+
 ## Reference1: The MAX7219 and MAX7221 Led drivers
 http://playground.arduino.cc/Main/MAX72XXHardware
 ## Reference2:  LED Matrix red 8x8 64 Led driven by MAX7219 (or MAX7221) and Arduino Uno
