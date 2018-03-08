@@ -48,3 +48,70 @@ https://www.youtube.com/watch?v=WYaa8wE5oFQ
 https://www.youtube.com/watch?v=v1vRjOU_pGA
 https://www.youtube.com/watch?v=DxjmQfeYztA
 
+# Project for blindness
+
+This is a wearable device designed for the blind. This is a ring. It can detect the distance of 10cm-20cm, and give the user vibration feedback. When the distance is shorter, its vibration will become faster. At the same time, I also connected a yellow-green display to show the distance, which facilitated my debugging equipment.
+
+## image：
+
+![img_6087](https://user-images.githubusercontent.com/35580394/37162350-dfbee4bc-22a9-11e8-80b5-aa9487658b82.JPG)
+![img_5990](https://user-images.githubusercontent.com/35580394/37162352-e2552092-22a9-11e8-8dc4-6d1e7c16c35e.JPG)
+![img_5989](https://user-images.githubusercontent.com/35580394/37162355-e385e776-22a9-11e8-8ea9-b7ca43e9b8eb.JPG)
+
+## Code:
+
+
+     #include <Wire.h>
+     #include <LiquidCrystal_I2C.h>
+    // Set I2C address of LCD1602 as 0x27, LCD1602 as two lines, 16 characters per line LCD
+    LiquidCrystal_I2C lcd (0x3F, 2,1,0,4,5,6,7); // set the LCD address to 0x27 for a 20 chars and 4 line display
+    int GP2D12 = 0; / / Sharp GP2D12 infrared ranging sensor connected to the analog port 0
+    int val; // Stores the value read from the GP2D12 IR distance sensor
+    float temp; // Stores the floating-point distance value computed by the sensor after reading the value
+    int distance; / / stored by the sensor to read the value, through the calculation of the integer distance value
+    // Initialize the program
+
+
+    void setup () {
+    lcd.begin (16,2); // for 16 x 2 LCD module
+    lcd.setBacklightPin (3, POSITIVE);
+    lcd.setBacklight (HIGH);
+    pinMode (LED_BUILTIN, OUTPUT);
+    }
+    // main program
+    void loop () {
+    // read GP2D12 infrared ranging sensor analog data
+    val = analogRead (GP2D12);
+    // Process the sensor readings into floating-point distance values ​​using the following formula
+    temp = 2547.8 / ((float) val * 0.49-10.41) -0.42;
+    lcd.clear (); // LCD clear screen
+    // Position the cursor on the LCD line 0, column 0
+    lcd.setCursor (0, 0);
+    // Display "Distance:" on the 0th row and 0th column of LCD
+    lcd.print ("Distance:");
+    // Position the cursor on the LCD line 2, column 8
+    lcd.setCursor (7, 1);
+    // If the sensor reading is greater than 80 or less than 16,
+    if (temp> 80 || temp <10.)
+    {
+    // Then LCD displays "OverRange" in row 1 and column 7
+    lcd.print ("OverRange");
+
+  
+    }
+    // If the sensor reads between 10 and 80,
+    else
+    {
+    // Round floating-point distance value
+    distance = int (temp);
+    // The second line in the LCD, the beginning of the eighth column distance value
+    lcd.print (distance);
+    // Display the unit "cm" after the distance value
+    lcd.print ("cm");
+    digitalWrite (LED_BUILTIN, HIGH);
+    delay (distance * 5);
+    digitalWrite (LED_BUILTIN, LOW);
+    delay (distance * 5);
+    }
+    }
+
