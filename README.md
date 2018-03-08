@@ -61,8 +61,8 @@ This is a wearable device designed for the blind. This is a ring. It can detect 
 ## Code:
 
 
-     #include <Wire.h>
-     #include <LiquidCrystal_I2C.h>
+    #include <Wire.h>
+    #include <LiquidCrystal_I2C.h>
     // Set I2C address of LCD1602 as 0x27, LCD1602 as two lines, 16 characters per line LCD
     LiquidCrystal_I2C lcd (0x3F, 2,1,0,4,5,6,7); // set the LCD address to 0x27 for a 20 chars and 4 line display
     int GP2D12 = 0; / / Sharp GP2D12 infrared ranging sensor connected to the analog port 0
@@ -70,8 +70,6 @@ This is a wearable device designed for the blind. This is a ring. It can detect 
     float temp; // Stores the floating-point distance value computed by the sensor after reading the value
     int distance; / / stored by the sensor to read the value, through the calculation of the integer distance value
     // Initialize the program
-
-
     void setup () {
     lcd.begin (16,2); // for 16 x 2 LCD module
     lcd.setBacklightPin (3, POSITIVE);
