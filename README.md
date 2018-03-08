@@ -59,55 +59,56 @@ This is a wearable device designed for the blind. This is a ring. It can detect 
 ![img_5989](https://user-images.githubusercontent.com/35580394/37162355-e385e776-22a9-11e8-8ea9-b7ca43e9b8eb.JPG)
 
 ## Code:
-      #include <Wire.h>
-      #include <LiquidCrystal_I2C.h>
-      // Set I2C address of LCD1602 as 0x27, LCD1602 as two lines, 16 characters per line LCD
-      LiquidCrystal_I2C lcd (0x3F, 2,1,0,4,5,6,7); // set the LCD address to 0x27 for a 20 chars and 4 line display
-      int GP2D12 = 0; / / Sharp GP2D12 infrared ranging sensor connected to the analog port 0
-      int val; // Stores the value read from the GP2D12 IR distance sensor
-      float temp; // Stores the floating-point distance value computed by the sensor after reading the value
-      int distance; / / stored by the sensor to read the value, through the calculation of the integer distance value
-      // Initialize the program
-      void setup () {
-      lcd.begin (16,2); // for 16 x 2 LCD module
-      lcd.setBacklightPin (3, POSITIVE);
-      lcd.setBacklight (HIGH);
-      pinMode (LED_BUILTIN, OUTPUT);
-      }
-      // main program
-      void loop () {
-      // read GP2D12 infrared ranging sensor analog data
-      val = analogRead (GP2D12);
-      // Process the sensor readings into floating-point distance values ​​using the following formula
-    temp = 2547.8 / ((float) val * 0.49-10.41) -0.42;
-    lcd.clear (); // LCD clear screen
-    // Position the cursor on the LCD line 0, column 0
-    lcd.setCursor (0, 0);
-    // Display "Distance:" on the 0th row and 0th column of LCD
-    lcd.print ("Distance:");
-    // Position the cursor on the LCD line 2, column 8
-    lcd.setCursor (7, 1);
-    // If the sensor reading is greater than 80 or less than 16,
-    if (temp> 80 || temp <10.)
-    {
-    // Then LCD displays "OverRange" in row 1 and column 7
-    lcd.print ("OverRange");
+    #include <Wire.h>
+    #include <LiquidCrystal_I2C.h>
+    //设置LCD1602的I2C地址为0x27，LCD1602为两行，每行16个字符的液晶显示器
+    LiquidCrystal_I2C lcd(0x3F, 2, 1, 0, 4, 5, 6, 7); // set the LCD address to 0x27 for a 20 chars and 4 line display
+    int GP2D12 = 0;//把夏普GP2D12红外测距传感器连接在模拟量端口0
+    int val; //存储从GP2D12红外测距传感器读到的值
+    float temp;//存储由传感器读取值，通过计算处理后的浮点型距离值
+    int distance;//存储由传感器读取值，通过计算处理后的整数型距离值
+    //初始化程序
 
-  
-    }
-    // If the sensor reads between 10 and 80,
-    else
-    {
-    // Round floating-point distance value
-    distance = int (temp);
-    // The second line in the LCD, the beginning of the eighth column distance value
-    lcd.print (distance);
-    // Display the unit "cm" after the distance value
-    lcd.print ("cm");
-    digitalWrite (LED_BUILTIN, HIGH);
-    delay (distance * 5);
-    digitalWrite (LED_BUILTIN, LOW);
-    delay (distance * 5);
-    }
+
+    void setup() {
+    lcd.begin (16, 2); // for 16 x 2 LCD module
+    lcd.setBacklightPin(3, POSITIVE);
+    lcd.setBacklight(HIGH);
+    pinMode(LED_BUILTIN, OUTPUT);
     }
+    //主程序
+    void loop() {
+    //读取GP2D12红外测距传感器模拟量数据
+    val = analogRead(GP2D12);
+    //通过以下算式，把传感器读取值处理成浮点型距离值
+    temp = 2547.8 / ((float)val * 0.49 - 10.41) - 0.42;
+    lcd.clear();//LCD清屏
+    // 定位光标在LCD第0行、第0列
+    lcd.setCursor(0, 0);
+    //在LCD第0行第0列开始显示"Distance:"
+    lcd.print("Distance:");
+    // 定位光标在LCD第2行、第8列
+    lcd.setCursor(7, 1);
+    //如果传感器读取值大于80或者小于16，
+    if (temp > 80 || temp < 10.)
+    {
+    //则在LCD第1行、第7列开始显示"OverRange"
+    lcd.print("OverRange");
 
+
+    }
+    //如果传感器读取值在10到80之间，
+    else
+    {
+    //把浮点型距离值取整
+    distance = int(temp);
+    //则在LCD第2行、第8列开始显示距离值
+    lcd.print(distance);
+    //在距离值后显示单位"cm"
+    lcd.print("cm");
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(distance * 5);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(distance * 5);
+    }
+    }
