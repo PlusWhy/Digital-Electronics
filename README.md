@@ -118,4 +118,196 @@ This is a wearable device designed for the blind. This is a ring. It can detect 
 ## Blindness Glove
 
 It is a wearable device that helps blind people. Users can explore the world through it. Blindness glove can convert colors to sound frequencies and also convert distances to vibration frequencies. It can detect the distance of 10cm-20cm, and give the user vibration feedback. Also, it can detect rgb color and transfer to hsl(hue,s...,l...), and convert hue data to sound frequency. Because the limitation of hue, it cannot tell black and white to blindness.
+### Image
+
+![img_4018](https://user-images.githubusercontent.com/35580394/39659271-a0e0d324-4fd9-11e8-93e4-1760901facf6.JPG)
+
+<img width="1596" alt="screen shot 2018-05-04 at 8 28 33 pm" src="https://user-images.githubusercontent.com/35580394/39659280-c512068c-4fd9-11e8-96d3-a734e61f2cd7.png">
+
+
+![img_4020](https://user-images.githubusercontent.com/35580394/39659272-a481fce2-4fd9-11e8-84bd-ec9232d0ebf4.JPG)
+
+### Video
+
+https://youtu.be/fkrfpTzuxd0
+
+### Paper reference(color to sound frequency)
+
+[colorNsound_SoohyunPark.pdf](https://github.com/PlusWhy/Digital-Electronics/files/1976294/colorNsound_SoohyunPark.pdf)
+
+[MarciaRojasPoster.pdf](https://github.com/PlusWhy/Digital-Electronics/files/1976295/MarciaRojasPoster.pdf)
+
+<img width="698" alt="screen shot 2018-04-25 at 4 12 37 pm" src="https://user-images.githubusercontent.com/35580394/39659314-8d4c6070-4fda-11e8-9917-96dc751dc54a.png">
+
+
+### Code
+
+    #include <Wire.h>
+    #include "Adafruit_TCS34725.h"
+
+    #define commonAnode true
+    #define MAX(a, b) (((a) > (b)) ? (a) : (b))
+    #define MIN(a, b) (((a) < (b)) ? (a) : (b))
+
+    int GP2D12=A0;
+    int val;
+    float temp;
+    int distance;
+
+    const int speaker = 9;
+
+
+
+    byte gammatable[256];
+
+
+    Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_50MS, TCS34725_GAIN_4X);
+
+    void setup() {
+    Serial.begin(9600);
+  
+    while(!Serial){
+    }
+  
+    Serial.println("Color View Test!");
+    pinMode(GP2D12, INPUT);
+    pinMode(LED_BUILTIN, OUTPUT);
+
+    if (tcs.begin()) {
+    Serial.println("Found sensor");
+    } else {
+    Serial.println("No TCS34725 found ... check your connections");
+    while (1); // halt!
+    }
+
+
+    for (int i = 0; i < 256; i++) {
+    float x = i;
+    x /= 255;
+    x = pow(x, 2.5);
+    x *= 255;
+
+    if (commonAnode) {
+      gammatable[i] = 255 - x;
+    } else {
+      gammatable[i] = x;
+    }
+    //Serial.println(gammatable[i]);
+     }
+    }
+
+
+    void loop() {
+
+    Serial.println("Begin Loop");
+  
+
+
+    uint16_t clear, red, green, blue;
+
+
+
+    delay(60);  // takes 50ms to read
+
+    tcs.getRawData(&red, &green, &blue, &clear);
+
+
+    // Figure out some basic hex code for visualization
+    uint32_t sum = clear;
+    float r, g, b;
+    r = red; r /= sum;
+    g = green; g /= sum;
+    b = blue; b /= sum;
+    r *= 256; g *= 256; b *= 256;
+
+
+    //  Serial.print((int)r ); Serial.print(" "); Serial.print((int)g); Serial.print(" ");  Serial.println((int)b );
+    float r1, g1, b1;
+    r1 = r / 255;
+    g1 = g / 255;
+    b1 = b / 255;
+
+    //  Serial.print(r1 ); Serial.print(" "); Serial.print(g1); Serial.print(" ");  Serial.println(b1);
+    float hue;
+    float saturation;
+    float luminance;
+    float fmax, fmin;
+    fmax = MAX(MAX(r1, g1), b1);
+    fmin = MIN(MIN(r1, g1), b1);
+    luminance = fmax;
+    if (fmax > 0)
+    {
+    saturation = (fmax - fmin) / fmax;
+    }
+    else
+    {
+    saturation = 0;
+    }
+
+
+    if (saturation == 0)
+    {
+    hue = 0;
+    }
+    else
+    {
+    if (fmax == r1)
+    {
+      hue = (g1 - b1) / (fmax - fmin);
+    }
+    else if (fmax == g1)
+    {
+      hue = 2 + (b1 - r1) / (fmax - fmin);
+    }
+    else
+    {
+      hue = 4 + (r1 - g1) / (fmax - fmin);
+    }
+
+    hue = hue / 6;
+    if (hue < 0) {
+      hue += 1;
+    }
+    }
+    //Serial.println(hue);
+    int hue1;
+    hue1 = hue * 100;
+
+    int thisPitch = map(hue1, 0, 100, 2000, 4000);
+    //Serial.println(thisPitch);
+    if (hue1 < 10) {
+    noTone(speaker);
+    }
+    else
+    {
+    tone(speaker, thisPitch, 5000);
+     }
+
+  
+    val = analogRead(GP2D12);
+    //通过以下算式，把传感器读取值处理成浮点型距离值
+    temp = 2547.8 / ((float)val * 0.49 - 10.41) - 0.42;
+
+     if(temp>70||temp<13.)
+      {
+    digitalWrite(LED_BUILTIN, LOW);
+
+    }
+
+    else
+    { 
+    //把浮点型距离值取整
+    distance=int(temp);
+    //则在LCD第2行、第8列开始显示距离值    lcd.print(distance);
+    //在距离值后显示单位"cm"    lcd.print("cm");
+
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(distance*5);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(distance*5);
+    }
+    Serial.println(distance);
+    }
+
+
 
