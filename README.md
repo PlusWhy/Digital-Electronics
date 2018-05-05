@@ -112,3 +112,10 @@ This is a wearable device designed for the blind. This is a ring. It can detect 
     delay(distance * 5);
     }
     }
+
+# Final project
+
+## Blindness Glove
+
+It is a wearable device that helps blind people. Users can explore the world through it. Blindness glove can convert colors to sound frequencies and also convert distances to vibration frequencies. It can detect the distance of 10cm-20cm, and give the user vibration feedback. Also, it can detect rgb color and transfer to hsl(hue,s...,l...), and convert hue data to sound frequency. Because the limitation of hue, it cannot tell black and white to blindness.
+
